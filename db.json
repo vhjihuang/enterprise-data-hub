@@ -1,0 +1,109 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "张三",
+      "email": "zhangsan@example.com",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "name": "王五",
+      "email": "wangwu@example.com",
+      "role": "user",
+      "status": "inactive"
+    },
+    {
+      "id": 5,
+      "name": "钱七",
+      "email": "qianqi@example.com",
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "id": 6,
+      "name": "孙八",
+      "email": "sunba@example.com",
+      "role": "user",
+      "status": "inactive"
+    },
+    {
+      "id": 7,
+      "name": "周九",
+      "email": "zhoujiu@example.com",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": 8,
+      "name": "吴十",
+      "email": "wushi@example.com",
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "email": "updated-484@example.com",
+      "status": "active",
+      "id": 9
+    }
+  ],
+  "products": [
+    {
+      "id": 101,
+      "name": "企业级数据分析软件",
+      "price": 12000,
+      "stock": 500,
+      "category": "Software"
+    },
+    {
+      "id": 102,
+      "name": "智能硬件设备包",
+      "price": 8500,
+      "stock": 200,
+      "category": "Hardware"
+    },
+    {
+      "id": 103,
+      "name": "云服务订阅",
+      "price": 500,
+      "stock": 999,
+      "category": "Service"
+    }
+  ],
+  "dashboardData": {
+    "totalSales": 12345678,
+    "newUsersToday": 150,
+    "activeUsers": 12000,
+    "salesTrend": [
+      {
+        "date": "2025-07-15",
+        "value": 100000
+      },
+      {
+        "date": "2025-07-16",
+        "value": 120000
+      },
+      {
+        "date": "2025-07-17",
+        "value": 115000
+      },
+      {
+        "date": "2025-07-18",
+        "value": 130000
+      },
+      {
+        "date": "2025-07-19",
+        "value": 145000
+      },
+      {
+        "date": "2025-07-20",
+        "value": 138000
+      },
+      {
+        "date": "2025-07-21",
+        "value": 155000
+      }
+    ]
+  }
+}

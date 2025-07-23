@@ -41,34 +41,88 @@
       "email": "wushi@example.com",
       "role": "user",
       "status": "active"
-    },
-    {
-      "email": "updated-484@example.com",
-      "status": "active",
-      "id": 9
     }
   ],
   "products": [
     {
-      "id": 101,
-      "name": "企业级数据分析软件",
-      "price": 12000,
-      "stock": 500,
-      "category": "Software"
+      "id": "101",
+      "name": "Laptop Pro 15",
+      "category": "Electronics",
+      "price": 1200.0,
+      "stock": 50,
+      "status": "available"
     },
     {
-      "id": 102,
-      "name": "智能硬件设备包",
-      "price": 8500,
+      "id": "102",
+      "name": "Wireless Mouse X1",
+      "category": "Accessories",
+      "price": 25.5,
       "stock": 200,
-      "category": "Hardware"
+      "status": "available"
     },
     {
-      "id": 103,
-      "name": "云服务订阅",
-      "price": 500,
-      "stock": 999,
-      "category": "Service"
+      "id": "103",
+      "name": "Mechanical Keyboard RGB",
+      "category": "Accessories",
+      "price": 89.99,
+      "stock": 75,
+      "status": "low_stock"
+    },
+    {
+      "id": "104",
+      "name": "Smart Speaker Max",
+      "category": "Electronics",
+      "price": 79.0,
+      "stock": 0,
+      "status": "out_of_stock"
+    },
+    {
+      "id": "105",
+      "name": "4K Ultra HD Monitor",
+      "category": "Electronics",
+      "price": 350.0,
+      "stock": 30,
+      "status": "available"
+    },
+    {
+      "id": "106",
+      "name": "USB-C Hub Pro",
+      "category": "Accessories",
+      "price": 45.0,
+      "stock": 120,
+      "status": "available"
+    },
+    {
+      "id": "107",
+      "name": "Noise Cancelling Headphones",
+      "category": "Audio",
+      "price": 199.0,
+      "stock": 40,
+      "status": "available"
+    },
+    {
+      "id": "108",
+      "name": "External SSD 1TB",
+      "category": "Storage",
+      "price": 99.0,
+      "stock": 60,
+      "status": "available"
+    },
+    {
+      "id": "109",
+      "name": "Gaming Chair Ergo",
+      "category": "Furniture",
+      "price": 250.0,
+      "stock": 15,
+      "status": "low_stock"
+    },
+    {
+      "id": "110",
+      "name": "Webcam HD 1080p",
+      "category": "Accessories",
+      "price": 39.99,
+      "stock": 90,
+      "status": "available"
     }
   ],
   "dashboardData": {

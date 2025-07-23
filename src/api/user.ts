@@ -20,4 +20,4 @@ export const updateUser = (id: number, data: Partial<User>): AxiosPromise<User> 
   request.put(`/users/${id}`, data)
 
 // 删除用户
-export const deleteUser = (id: number): AxiosPromise<null> => request.delete(`/users/${id}`)
+export const deleteUser = (id: number): AxiosPromise<void> => request.delete(`/users/${id}`)

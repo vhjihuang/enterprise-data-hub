@@ -86,7 +86,6 @@ const handleDeleteUser = (row: User) => {
     try {
       await deleteUser(row.id)
       ElMessage.success(`用户 ${row.name}(ID: ${row.id}) 删除成功`)
-      allUsers.value = allUsers.value.filter((user) => user.id !== row.id)
     } catch (err: any) {
       ElMessage.error(`删除用户 ${row.name}(ID: ${row.id}) 失败`)
     }

@@ -1,57 +1,70 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "张三",
-      "email": "zhangsan@example.com",
+      "id": "1",
+      "name": "Alice Smith",
+      "email": "alice.smith@example.com",
       "role": "admin",
       "status": "active"
     },
     {
-      "id": 3,
-      "name": "王五",
-      "email": "wangwu@example.com",
+      "id": "3",
+      "name": "Charlie Brown",
+      "email": "charlie.brown@example.com",
       "role": "user",
       "status": "inactive"
     },
     {
-      "id": 5,
-      "name": "钱七",
-      "email": "qianqi@example.com",
-      "role": "user",
-      "status": "active"
-    },
-    {
-      "id": 6,
-      "name": "孙八",
-      "email": "sunba@example.com",
-      "role": "user",
-      "status": "inactive"
-    },
-    {
-      "id": 7,
-      "name": "周九",
-      "email": "zhoujiu@example.com",
+      "id": "4",
+      "name": "Diana Prince",
+      "email": "diana.prince@example.com",
       "role": "admin",
       "status": "active"
     },
     {
-      "id": 8,
-      "name": "吴十",
-      "email": "wushi@example.com",
+      "id": "5",
+      "name": "Eve Adams",
+      "email": "eve.adams@example.com",
       "role": "user",
+      "status": "active"
+    },
+    {
+      "id": "6",
+      "name": "Frank White",
+      "email": "frank.white@example.com",
+      "role": "user",
+      "status": "inactive"
+    },
+    {
+      "id": "7",
+      "name": "Grace Black",
+      "email": "grace.black@example.com",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "8",
+      "name": "Harry Green",
+      "email": "harry.green@example.com",
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "id": "9",
+      "name": "Ivy Blue",
+      "email": "ivy.blue@example.com",
+      "role": "user",
+      "status": "inactive"
+    },
+    {
+      "id": "10",
+      "name": "Jack Red",
+      "email": "jack.red@example.com",
+      "role": "admin",
       "status": "active"
     }
   ],
   "products": [
-    {
-      "id": "101",
-      "name": "Laptop Pro 15",
-      "category": "Electronics",
-      "price": 1200.0,
-      "stock": 50,
-      "status": "available"
-    },
     {
       "id": "102",
       "name": "Wireless Mouse X1",
@@ -72,7 +85,7 @@
       "id": "104",
       "name": "Smart Speaker Max",
       "category": "Electronics",
-      "price": 79.0,
+      "price": 79,
       "stock": 0,
       "status": "out_of_stock"
     },
@@ -80,7 +93,7 @@
       "id": "105",
       "name": "4K Ultra HD Monitor",
       "category": "Electronics",
-      "price": 350.0,
+      "price": 350,
       "stock": 30,
       "status": "available"
     },
@@ -88,7 +101,7 @@
       "id": "106",
       "name": "USB-C Hub Pro",
       "category": "Accessories",
-      "price": 45.0,
+      "price": 45,
       "stock": 120,
       "status": "available"
     },
@@ -96,7 +109,7 @@
       "id": "107",
       "name": "Noise Cancelling Headphones",
       "category": "Audio",
-      "price": 199.0,
+      "price": 199,
       "stock": 40,
       "status": "available"
     },
@@ -104,7 +117,7 @@
       "id": "108",
       "name": "External SSD 1TB",
       "category": "Storage",
-      "price": 99.0,
+      "price": 99,
       "stock": 60,
       "status": "available"
     },
@@ -112,7 +125,7 @@
       "id": "109",
       "name": "Gaming Chair Ergo",
       "category": "Furniture",
-      "price": 250.0,
+      "price": 250,
       "stock": 15,
       "status": "low_stock"
     },
@@ -123,6 +136,120 @@
       "price": 39.99,
       "stock": 90,
       "status": "available"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD003",
+      "userId": "3",
+      "userName": "Charlie Brown",
+      "orderDate": "2023-01-17",
+      "totalAmount": 79,
+      "status": "cancelled",
+      "items": [
+        {
+          "productId": "104",
+          "productName": "Smart Speaker Max",
+          "quantity": 1,
+          "price": 79
+        }
+      ]
+    },
+    {
+      "id": "ORD004",
+      "userId": "1",
+      "userName": "Alice Smith",
+      "orderDate": "2023-01-18",
+      "totalAmount": 350,
+      "status": "completed",
+      "items": [
+        {
+          "productId": "105",
+          "productName": "4K Ultra HD Monitor",
+          "quantity": 1,
+          "price": 350
+        }
+      ]
+    },
+    {
+      "id": "ORD005",
+      "userId": "5",
+      "userName": "Eve Adams",
+      "orderDate": "2023-01-19",
+      "totalAmount": 45,
+      "status": "shipped",
+      "items": [
+        {
+          "productId": "106",
+          "productName": "USB-C Hub Pro",
+          "quantity": 1,
+          "price": 45
+        }
+      ]
+    },
+    {
+      "id": "ORD007",
+      "userId": "7",
+      "userName": "Grace Black",
+      "orderDate": "2023-01-21",
+      "totalAmount": 99,
+      "status": "completed",
+      "items": [
+        {
+          "productId": "108",
+          "productName": "External SSD 1TB",
+          "quantity": 1,
+          "price": 99
+        }
+      ]
+    },
+    {
+      "id": "ORD008",
+      "userId": "8",
+      "userName": "Harry Green",
+      "orderDate": "2023-01-22",
+      "totalAmount": 250,
+      "status": "shipped",
+      "items": [
+        {
+          "productId": "109",
+          "productName": "Gaming Chair Ergo",
+          "quantity": 1,
+          "price": 250
+        }
+      ]
+    },
+    {
+      "id": "ORD009",
+      "userId": "9",
+      "userName": "Ivy Blue",
+      "orderDate": "2023-01-23",
+      "totalAmount": 39.99,
+      "status": "pending",
+      "items": [
+        {
+          "productId": "110",
+          "productName": "Webcam HD 1080p",
+          "quantity": 1,
+          "price": 39.99
+        }
+      ]
+    },
+    {
+      "id": "ORD010",
+      "userId": "4",
+      "userName": "Diana Prince",
+      "orderDate": "2023-01-24",
+      "totalAmount": 1200,
+      "status": "completed",
+      "items": [
+        {
+          "productId": "101",
+          "productName": "Laptop Pro 15",
+          "quantity": 1,
+          "price": 1200
+        }
+      ]
     }
   ],
   "dashboardData": {

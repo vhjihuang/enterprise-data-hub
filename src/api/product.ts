@@ -1,7 +1,7 @@
 import request from './index'
 import type { AxiosPromise } from 'axios'
 export interface Product {
-  id: number
+  id: string
   name: string
   category: string
   price: number
@@ -11,10 +11,10 @@ export interface Product {
 
 export const getProducts = (): AxiosPromise<Product[]> => request.get('/products')
 
-const addProduct = (data: Omit<Product, 'id'>): AxiosPromise<Product> =>
+export const addProduct = (data: Omit<Product, 'id'>): AxiosPromise<Product> =>
   request.post('/products', data)
 
-const patchProduct = (id: number, data: Partial<Product>): AxiosPromise<Product> =>
+export const patchProduct = (id: number, data: Partial<Product>): AxiosPromise<Product> =>
   request.patch(`/products/${id}`, data)
 
-const deleteProduct = (id: number): AxiosPromise<void> => request.delete(`/products/${id}`)
+export const deleteProduct = (id: string): AxiosPromise<void> => request.delete(`/products/${id}`)

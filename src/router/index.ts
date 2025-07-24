@@ -26,6 +26,12 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '商品管理', icon: 'ShoppingCart' },
   },
   {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('../views/OrderView.vue'),
+    meta: { title: '订单管理', icon: 'ShoppingCart' },
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

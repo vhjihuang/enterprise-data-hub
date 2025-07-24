@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getProducts, type Product } from '@/api/product'
+import { getProducts, deleteProduct, type Product } from '@/api/product'
 import { unwrap } from '@/utils/api'
 
 interface searchForm {
@@ -80,11 +80,24 @@ const getProductStatusText = (status: Product['status']) => {
   return statusMap.get(status) || '未知'
 }
 
-const handleEditProduct = () => {
+const handleEditProduct = (row: Product) => {
   ElMessage.info('功能正在开发中...')
 }
-const handleDeleteProduct = () => {
-  ElMessage.info('功能正在开发中...')
+const handleDeleteProduct = (row: Product) => {
+  ElMessageBox.confirm(`确定要删除用户${row.name}(ID: ${row.id})吗?`, '删除后不可恢复!', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    try {
+      await deleteProduct(row.id)
+      ElMessage.success(`用户 ${row.name}(ID: ${row.id}) 删除成功`)
+    } catch (err: any) {
+      ElMessage.error(`删除用户 ${row.name}(ID: ${row.id}) 失败`)
+    }
+  }).catch(() => {
+    ElMessage.info('已取消删除')
+  })
 }
 
 const handleSizeChange = (value: number) => {

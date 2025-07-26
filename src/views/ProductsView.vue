@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getProducts, deleteProduct, type Product } from '@/api/product'
+import { getProducts, addProduct, patchProduct, deleteProduct, type Product } from '@/api/product'
 import { unwrap } from '@/utils/api'
+import ProductFormDialog from '@/components/ProductFormDialog.vue'
 
 interface searchForm {
   name: string
@@ -12,12 +13,16 @@ interface searchForm {
 const statusMap = new Map([
   ['available', '正常'],
   ['low_stock', '库存低'],
-  ['out-of-stock', '缺货'],
+  ['out_of_stock', '缺货'],
 ])
 const ININ_PRODUCTS = Object.freeze({ name: "", category: "", status: "", })
 const searchForm = reactive<searchForm>({ ...ININ_PRODUCTS })
 const allProducts = ref<Product[]>([])
 const loading = ref<boolean>(false)
+
+const modelValue = ref<boolean>(false)
+const productData = ref<Product | undefined>(undefined)
+
 const currentPage = ref<number>(1)
 const pageSize = ref<number>(10)
 
@@ -60,7 +65,8 @@ const fetchProducts = async () => {
   }
 }
 const handleAddProduct = () => {
-  ElMessage.info('功能正在开发中...')
+  modelValue.value = true
+  productData.value = undefined
 }
 
 const getProductStatusTagType = (status: Product['status']) => {
@@ -81,9 +87,10 @@ const getProductStatusText = (status: Product['status']) => {
 }
 
 const handleEditProduct = (row: Product) => {
-  ElMessage.info('功能正在开发中...')
+  modelValue.value = true
+  productData.value = row
 }
-const handleDeleteProduct = (row: Product) => {
+const handleDeleteProduct = async (row: Product) => {
   ElMessageBox.confirm(`确定要删除用户${row.name}(ID: ${row.id})吗?`, '删除后不可恢复!', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
@@ -91,6 +98,7 @@ const handleDeleteProduct = (row: Product) => {
   }).then(async () => {
     try {
       await deleteProduct(row.id)
+      fetchProducts()
       ElMessage.success(`用户 ${row.name}(ID: ${row.id}) 删除成功`)
     } catch (err: any) {
       ElMessage.error(`删除用户 ${row.name}(ID: ${row.id}) 失败`)
@@ -98,6 +106,28 @@ const handleDeleteProduct = (row: Product) => {
   }).catch(() => {
     ElMessage.info('已取消删除')
   })
+}
+
+const sumbit = async (data: Omit<Product, 'id'> | Product, isEdit: boolean) => {
+  if (isEdit) {
+    try {
+      await patchProduct((data as Product).id, data)
+      modelValue.value = false
+      ElMessage.success(`用户 ${data.name}(ID: ${(data as Product).id}) 更新成功`)
+      fetchProducts()
+    } catch (err: any) {
+      ElMessage.error(`更新用户 ${data.name}(ID: ${(data as Product).id}) 失败`)
+    }
+  } else {
+    try {
+      await addProduct(data)
+      modelValue.value = false
+      fetchProducts()
+    } catch (err: any) {
+      ElMessage.error('添加产品失败')
+    }
+  }
+
 }
 
 const handleSizeChange = (value: number) => {
@@ -156,7 +186,7 @@ onMounted(() => {
         <el-table-column prop="category" label="分类" width="150" />
         <el-table-column prop="price" label="价格" width="120" sortable>
           <template #default="{ row }">
-            ¥ {{ row.price.toFixed(2) }}
+            ¥ {{ Number(row.price)?.toFixed(2) }}
           </template>
         </el-table-column>
         <el-table-column prop="stock" label="库存" width="100" sortable />
@@ -181,6 +211,7 @@ onMounted(() => {
           :total="filteredProducts.length" />
       </div>
     </el-card>
+    <ProductFormDialog v-model="modelValue" :product-data="productData" @sumbit="sumbit" />
   </div>
 </template>
 

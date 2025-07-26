@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, reactive, toRefs, computed, onMounted } from 'vue';
+import { ref, reactive, computed, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'; // Element Plus 组件和消息框
-import { getUsers, deleteUser, type User } from '@/api/user'; // 确保引入了 deleteUser 和 User 类型
+import { getUsers, updateUser, addUser, deleteUser, type User } from '@/api/user'; // 确保引入了 deleteUser 和 User 类型
 import { unwrap } from '@/utils/api'; // 引入 unwrap 函数
+import UserFormDialog from '@/components/UserFormDialog.vue';
+
 
 interface SearchForm {
   name: string
@@ -20,6 +22,10 @@ const searchForm = reactive<SearchForm>({ ...INIT_SEARCH_FORM })
 
 const allUsers = ref<User[]>([])
 const loading = ref<boolean>(false)
+
+const modelValue = ref<boolean>(false)
+let isEdit = ref<boolean>(false)
+const userData = ref<User | undefined>(undefined)
 
 const currentPage = ref<number>(1)
 const pageSize = ref<number>(10)
@@ -71,10 +77,16 @@ const resetSearch = () => {
 
 const handleAddUser = () => {
   ElMessage.info('添加用户功能暂未实现')
+  modelValue.value = true
+  isEdit.value = false
+  userData.value = undefined
 }
 
 const handleEditUser = (row: User) => {
   ElMessage.info(`编辑用户:${row.name}(ID: ${row.id})-功能暂未实现`)
+  modelValue.value = true
+  isEdit.value = true
+  userData.value = row
 }
 
 const handleDeleteUser = (row: User) => {
@@ -102,6 +114,32 @@ const handleSizeChange = (value: number) => {
 const handleCurrentChange = (value: number) => {
   currentPage.value = value
 }
+const sumbit = async (data: Omit<User, 'id'> | User, isEditFlag: boolean) => {
+  console.log('sumbit', data)
+  if (!isEditFlag) {
+    try {
+      await addUser(data as Omit<User, 'id'>)
+      fetchUsers()
+      ElMessage.success('添加用户成功')
+    } catch (error) {
+      console.log(error)
+      ElMessage.success('添加用户失败')
+    }
+
+  } else {
+    try {
+      await updateUser(String((data as User).id), data)
+      fetchUsers()
+      ElMessage.success('更新用户成功')
+    } catch (error) {
+      console.log(error)
+      ElMessage.success('更新用户失败')
+    }
+  }
+  modelValue.value = false
+  isEdit.value = false
+}
+const cancel = () => isEdit.value = false
 
 onMounted(() => {
   fetchUsers()
@@ -177,5 +215,7 @@ onMounted(() => {
           :total="filteredUsers.length" />
       </div>
     </el-card>
+
   </div>
+  <UserFormDialog v-model="modelValue" :is-edit="isEdit" :userData="userData" @sumbit="sumbit" @cancel="cancel" />
 </template>

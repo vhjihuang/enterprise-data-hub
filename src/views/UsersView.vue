@@ -114,8 +114,8 @@ const handleSizeChange = (value: number) => {
 const handleCurrentChange = (value: number) => {
   currentPage.value = value
 }
-const sumbit = async (data: Omit<User, 'id'> | User, isEditFlag: boolean) => {
-  console.log('sumbit', data)
+const submit = async (data: Omit<User, 'id'> | User, isEditFlag: boolean) => {
+  console.log('submit', data)
   if (!isEditFlag) {
     try {
       await addUser(data as Omit<User, 'id'>)
@@ -217,5 +217,5 @@ onMounted(() => {
     </el-card>
 
   </div>
-  <UserFormDialog v-model="modelValue" :is-edit="isEdit" :userData="userData" @sumbit="sumbit" @cancel="cancel" />
+  <UserFormDialog v-model="modelValue" :is-edit="isEdit" :userData="userData" @submit="submit" @cancel="cancel" />
 </template>

@@ -108,7 +108,7 @@ const handleDeleteProduct = async (row: Product) => {
   })
 }
 
-const sumbit = async (data: Omit<Product, 'id'> | Product, isEdit: boolean) => {
+const submit = async (data: Omit<Product, 'id'> | Product, isEdit: boolean) => {
   if (isEdit) {
     try {
       await patchProduct((data as Product).id, data)
@@ -211,7 +211,7 @@ onMounted(() => {
           :total="filteredProducts.length" />
       </div>
     </el-card>
-    <ProductFormDialog v-model="modelValue" :product-data="productData" @sumbit="sumbit" />
+    <ProductFormDialog v-model="modelValue" :product-data="productData" @submit="submit" />
   </div>
 </template>
 

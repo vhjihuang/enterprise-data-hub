@@ -14,7 +14,7 @@ interface Props {
 // 限制传参规则
 interface Emits {
   (e: 'update:modelValue', value: boolean): void
-  (e: 'sumbit', data: Omit<User, 'id'> | User, isEdit: boolean): void
+  (e: 'submit', data: Omit<User, 'id'> | User, isEdit: boolean): void
   (e: 'cancel'): void
 }
 
@@ -22,7 +22,7 @@ const FORMDATA = Object.freeze({
   name: '',
   email: '',
   role: '',
-  status: ''
+  status: 'active'
 })
 
 // 逻辑
@@ -65,7 +65,7 @@ const handleSubmit = async () => {
   if (!formRef.value) return
   formRef.value?.validate(valid => {
     if (valid) {
-      emit('sumbit', { ...formData } as Omit<User, 'id'> | User, props.isEdit)
+      emit('submit', { ...formData } as Omit<User, 'id'> | User, props.isEdit)
     } else {
       ElMessage.error('请检查表单输入！');
     }

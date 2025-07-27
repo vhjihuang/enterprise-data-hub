@@ -4,9 +4,9 @@ export interface Product {
   id: string
   name: string
   category: string
-  price: number | string
-  stock: number | string
-  status: 'available' | 'low_stock' | 'out-of-stock'
+  price: number
+  stock: number
+  status: 'available' | 'low_stock' | 'out_of_stock'
 }
 
 export const getProducts = (): AxiosPromise<Product[]> => request.get('/products')

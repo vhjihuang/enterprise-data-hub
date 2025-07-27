@@ -13,15 +13,15 @@ interface Props {
 // 限制传参规则
 interface Emits {
   (e: 'update:modelValue', value: boolean): void
-  (e: 'sumbit', data: Omit<Product, 'id'> | Product, isEdit: boolean): void
+  (e: 'submit', data: Omit<Product, 'id'> | Product, isEdit: boolean): void
   (e: 'cancel'): void
 }
 
 const FORMDATA = Object.freeze({
   name: '',
   category: '',
-  price: '',
-  stock: '',
+  price: 0,
+  stock: 1,
   status: 'available',
 })
 
@@ -67,7 +67,7 @@ const handleSubmit = async () => {
   if (!formRef.value) return
   formRef.value?.validate(valid => {
     if (valid) {
-      emit('sumbit', { ...formData, price: Number(formData.price), stock: Number(formData.stock) } as Omit<Product, 'id'> | Product, isEdit.value)
+      emit('submit', { ...formData, price: Number(formData.price), stock: Number(formData.stock) } as Omit<Product, 'id'> | Product, isEdit.value)
     } else {
       ElMessage.error('请检查表单输入！');
     }

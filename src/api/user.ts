@@ -2,11 +2,11 @@ import request from './index'
 import type { AxiosPromise } from 'axios'
 
 export interface User {
-  id: number
+  id: string
   name: string
   email: string
   role: string
-  status: string
+  status: 'active' | 'inactive'
 }
 
 // 获取用户列表
@@ -20,4 +20,4 @@ export const updateUser = (id: string, data: Partial<User>): AxiosPromise<User> 
   request.patch(`/users/${id}`, data)
 
 // 删除用户
-export const deleteUser = (id: number): AxiosPromise<void> => request.delete(`/users/${id}`)
+export const deleteUser = (id: string): AxiosPromise<void> => request.delete(`/users/${id}`)

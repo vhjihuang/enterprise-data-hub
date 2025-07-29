@@ -6,10 +6,6 @@ interface AuthState {
   isInitialized: boolean
 }
 
-// 定义 localStorage 的键名，集中管理
-const AUTH_TOKEN_KEY = 'auth_token'
-const USER_ROLE_KEY = 'user_role'
-
 export const useAuthStore = defineStore('auth', {
   state: (): AuthState => ({
     token: auth.getToken(),

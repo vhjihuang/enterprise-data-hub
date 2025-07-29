@@ -2,7 +2,7 @@
 import TheWelcome from '../components/TheWelcome.vue'
 import { Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue'
-import { type User, getUsers, addUser, updateUser, deleteUser } from '@/api/user'
+import { type User, getUsers, addUser, updateUser, deleteUser } from '@/services/users'
 import { ElMessage, ElMessageBox, ElAlert } from 'element-plus'
 
 import { unwrap } from '@/utils/api'

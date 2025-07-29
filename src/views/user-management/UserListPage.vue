@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'; // Element Plus 组件和消息框
-import { getUsers, updateUser, addUser, deleteUser, type User } from '@/api/user'; // 确保引入了 deleteUser 和 User 类型
+import { getUsers, updateUser, addUser, deleteUser, type User } from '@/services/users'; // 确保引入了 deleteUser 和 User 类型
 import { unwrap } from '@/utils/api'; // 引入 unwrap 函数
 import UserFormDialog from '@/components/UserFormDialog.vue';
 

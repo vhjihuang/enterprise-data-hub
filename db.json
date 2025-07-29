@@ -3,6 +3,8 @@
     {
       "id": "1",
       "name": "Alice Smith",
+      "username": "admin",
+      "password": "password",
       "email": "alice.smith@example.com",
       "role": "admin",
       "status": "active"
@@ -10,6 +12,8 @@
     {
       "id": "3",
       "name": "Charlie Brown",
+      "username": "user",
+      "password": "password",
       "email": "charlie.brown@example.com",
       "role": "user",
       "status": "inactive"
@@ -175,8 +179,7 @@
           "quantity": 1,
           "price": 79
         }
-      ],
-      "price": 79
+      ]
     },
     {
       "id": "ORD004",
@@ -313,8 +316,7 @@
           "quantity": 3,
           "price": 350
         }
-      ],
-      "price": 79
+      ]
     },
     {
       "id": "AgQKZlg",
@@ -338,6 +340,15 @@
         }
       ]
     }
+  ],
+  "login": [
+    {
+      "username": "admin",
+      "password": "password",
+      "token": "mock-admin-token-123",
+      "role": "admin"
+    },
+    { "username": "user", "password": "password", "token": "mock-user-token-456", "role": "user" }
   ],
   "dashboardData": {
     "totalSales": 12345678,

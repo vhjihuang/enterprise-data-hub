@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive, watch, computed, nextTick } from 'vue'
-import type { Order, OrderItem } from '../api/order'
-import { getUsers, type User } from '../api/user'
-import { getProducts, type Product } from '../api/product'
-import type { FormInstance, FormRules, FormItemRule } from 'element-plus'
+import type { Order, OrderItem } from '@/services/orders'
+import { getUsers, type User } from '@/services/users'
+import { getProducts, type Product } from '@/services/products'
+import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage, ElLoading } from 'element-plus'
 import { Delete, Plus } from '@element-plus/icons-vue'
 import { unwrap } from '@/utils/api'

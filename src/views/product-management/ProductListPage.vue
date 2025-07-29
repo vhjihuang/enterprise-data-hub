@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getProducts, addProduct, patchProduct, deleteProduct, type Product } from '@/api/product'
+import { getProducts, addProduct, patchProduct, deleteProduct, type Product } from '@/services/products'
 import { unwrap } from '@/utils/api'
 import ProductFormDialog from '@/components/ProductFormDialog.vue'
 
@@ -75,7 +75,7 @@ const getProductStatusTagType = (status: Product['status']) => {
       return 'success'
     case 'low_stock':
       return 'warning'
-    case 'out-of-stock':
+    case 'out_of_stock':
       return 'danger'
     default:
       return 'info'

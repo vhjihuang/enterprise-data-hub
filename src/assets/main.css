@@ -3,13 +3,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* #app 样式，根据你的实际需求，可以保留或调整 */
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px;  这个通常用于居中和限制内容宽度，如果你的整个布局是全宽的，可能需要调整或移除 */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
   font-weight: normal;
+  /* 确保 #app 撑满视口，与html, body配合 */
+  height: 100vh; /* 新增或确认 */
+  margin: 0; /* 确保没有默认外边距 */
+  padding: 0; /* 确保没有默认内边距 */
+  overflow: hidden; /* 防止 #app 内部出现滚动条 */
 }
 
+/* 其他全局样式 */
 a,
 .green {
   text-decoration: none;
@@ -24,15 +31,60 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+/* 将 App.vue 中的这些通用布局样式移到这里 */
+html,
+body {
+  /* 这两行也可以保留在 base.css 中，取决于你如何组织 */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 防止出现多余的滚动条 */
+}
+
+/* common-layout 也是顶层布局，可以放在这里 */
+.common-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* el-container 是整个侧边栏+主内容区域的容器，也适合全局 */
+.el-container {
+  flex: 1; /* 让它在 common-layout 的flex布局中撑满剩余空间 */
+}
+
+/* Element Plus 菜单样式调整，通常可以放在全局 */
+.el-menu-vertical-demo {
+  /* 确保菜单背景色和文本颜色，如果已经在模板中绑定，这里可以省略 */
+  /* background-color: #1f2937; */
+  /* color: #fff; */
+  border-right: none; /* 移除右侧边框，通常不需要 !important */
+  height: calc(100vh - 64px); /* 菜单高度，减去顶部标题栏高度 (假设Header高度64px) */
+  overflow-y: auto; /* 菜单内容溢出时可滚动 */
+}
+
+/* el-main 样式，确保内容区域的高度和滚动 */
+.el-main {
+  min-height: calc(100vh - 64px); /* 减去header的高度 */
+  overflow-y: auto; /* 内容溢出时可滚动 */
+  padding: 20px; /* 默认padding，如果ElMain没有自己的padding */
+}
+
+/* el-aside 的过渡效果可以在这里定义 */
+.el-aside {
+  transition: width 0.3s ease; /* 确保宽度过渡平滑 */
+}
+
+/* @media (min-width: 1024px) 中的 body 和 #app 样式可能与全屏布局冲突，
+   如果你的目标是全屏管理后台，建议移除或修改这部分 */
+/* @media (min-width: 1024px) {
   body {
     display: flex;
     place-items: center;
   }
-
   #app {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
-}
+} */

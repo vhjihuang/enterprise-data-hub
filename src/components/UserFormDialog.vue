@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
-import { type User } from '../api/user'
+import { type User } from '@/services/users'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus';
 

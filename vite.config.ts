@@ -29,4 +29,10 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    host: true, // 监听所有网络接口
+    port: 5173, // 明确指定端口
+    strictPort: true, // 端口占用直接报错
+    open: true, // 自动打开浏览器
+  },
 })

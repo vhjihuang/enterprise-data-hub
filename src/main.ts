@@ -17,4 +17,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(createPinia())
 app.use(router)
 
+// 后续可以优化路由切换进度条（main.ts）
+// 权限控制指令（全局注册）
+
 app.mount('#app')

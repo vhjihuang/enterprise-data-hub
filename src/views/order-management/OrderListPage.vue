@@ -2,7 +2,7 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Plus } from '@element-plus/icons-vue';
-import { getOrders, addOrder, updateOrder, deleteOrder, type Order } from '@/api/order';
+import { getOrders, createOrder, updateOrder, deleteOrder, type Order } from '@/services/orders';
 import { unwrap } from '@/utils/api';
 import OrderFormDialog from '@/components/OrderFormDialog.vue';
 
@@ -149,7 +149,7 @@ const submit = async (data: Order | Omit<Order, 'id'>, isEdit: boolean) => {
       await updateOrder((data as Order).id, data);
       ElMessage.success('订单更新成功');
     } else {
-      await addOrder(data as Omit<Order, 'id'>);
+      await createOrder(data as Omit<Order, 'id'>);
       ElMessage.success('订单添加成功');
     }
 

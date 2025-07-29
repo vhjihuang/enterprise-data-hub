@@ -1,4 +1,4 @@
-import request from './index'
+import service from '@/utils/request'
 import type { AxiosPromise } from 'axios'
 export interface Product {
   id: string
@@ -9,12 +9,12 @@ export interface Product {
   status: 'available' | 'low_stock' | 'out_of_stock'
 }
 
-export const getProducts = (): AxiosPromise<Product[]> => request.get('/products')
+export const getProducts = (): AxiosPromise<Product[]> => service.get('/products')
 
 export const addProduct = (data: Omit<Product, 'id'>): AxiosPromise<Product> =>
-  request.post('/products', data)
+  service.post('/products', data)
 
 export const patchProduct = (id: string, data: Partial<Product>): AxiosPromise<Product> =>
-  request.patch(`/products/${id}`, data)
+  service.patch(`/products/${id}`, data)
 
-export const deleteProduct = (id: string): AxiosPromise<void> => request.delete(`/products/${id}`)
+export const deleteProduct = (id: string): AxiosPromise<void> => service.delete(`/products/${id}`)

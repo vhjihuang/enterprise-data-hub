@@ -1,6 +1,6 @@
 // src/router/index.ts
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
 // ✅ 导入所有模块化的路由数组
 // 这些是你在 src/router/routes/ 目录下创建的文件

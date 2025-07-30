@@ -1,25 +1,7 @@
 import service from '@/utils/request'
 import type { AxiosResponse } from 'axios'
 
-// 类型定义更清晰，添加文档注释
-export interface OrderItem {
-  productId: string
-  productName: string
-  quantity: number
-  price: number
-}
-
-export type OrderStatus = 'pending' | 'shipped' | 'completed' | 'cancelled'
-
-export interface Order {
-  id: string
-  userId: string
-  userName: string
-  orderDate: string
-  totalAmount: number
-  status: OrderStatus
-  items: OrderItem[]
-}
+import type { Order, OrderItem, OrderStatus } from '../types'
 
 // 使用更明确的返回类型，而不是AxiosPromise
 export const getOrders = (): Promise<AxiosResponse<Order[]>> => {

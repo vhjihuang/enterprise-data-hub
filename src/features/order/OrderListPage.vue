@@ -2,9 +2,9 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Plus } from '@element-plus/icons-vue';
-import { getOrders, createOrder, updateOrder, deleteOrder, type Order } from '@/services/orders';
+import { getOrders, createOrder, updateOrder, deleteOrder, type Order } from '@/features/order/api/orders';
 import { unwrap } from '@/utils/api';
-import OrderFormDialog from '@/components/OrderFormDialog.vue';
+import OrderFormDialog from '@/features/order/components/OrderFormDialog.vue';
 
 // ==================== 新增的类型定义 ====================
 type OrderStatus = 'pending' | 'shipped' | 'completed' | 'cancelled';

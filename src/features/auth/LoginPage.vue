@@ -24,7 +24,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 // 导入 Pinia 的 Auth Store
-import { useAuthStore } from '@/stores/auth' // 确保路径正确
+import { useAuthStore } from '@/features/auth/stores/useAuthStore' // 确保路径正确
 import type { FormInstance, FormRules } from 'element-plus'
 
 // 移除或注释掉这行：

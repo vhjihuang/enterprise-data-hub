@@ -1,13 +1,6 @@
 import service from '@/utils/request'
 import type { AxiosPromise } from 'axios'
-export interface Product {
-  id: string
-  name: string
-  category: string
-  price: number
-  stock: number
-  status: 'available' | 'low_stock' | 'out_of_stock'
-}
+import type { Product } from '../types'
 
 export const getProducts = (): AxiosPromise<Product[]> => service.get('/products')
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive, watch, computed, nextTick } from 'vue'
-import type { Order, OrderItem } from '@/services/orders'
-import { getUsers, type User } from '@/services/users'
-import { getProducts, type Product } from '@/services/products'
+import type { Order, OrderItem } from '../types'
+import type { User } from '@/features/user/types'
+import { getUsers } from '@/features/user/api/users'
+import { getProducts, } from '@/features/product/api/products'
+import { type Product } from '@/features/product/types'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage, ElLoading } from 'element-plus'
 import { Delete, Plus } from '@element-plus/icons-vue'

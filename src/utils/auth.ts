@@ -1,5 +1,5 @@
 // src/utils/auth.ts
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
 /**
  * 检查当前用户是否拥有某个角色。

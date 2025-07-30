@@ -15,7 +15,9 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@features/*": ["./src/features/*"],
+      "@auth-store/*": ["./src/features/auth/stores/*"]
     }
   }
 }

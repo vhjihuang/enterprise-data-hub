@@ -1,13 +1,7 @@
 import service from '@/utils/request'
 import type { AxiosPromise } from 'axios'
+import type { User } from '../types/index'
 
-export interface User {
-  id: string
-  name: string
-  email: string
-  role: string
-  status: 'active' | 'inactive'
-}
 /**
  * 获取所有用户列表
  * @returns 用户列表 Promise

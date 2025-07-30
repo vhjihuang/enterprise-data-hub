@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import TheWelcome from '@/components/TheWelcome.vue'
 import { Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue'
-import { type User, getUsers, addUser, updateUser, deleteUser } from '@/services/users'
+import { type User, getUsers, addUser, updateUser, deleteUser } from '@/features/user/api/users'
 import { ElMessage, ElMessageBox, ElAlert } from 'element-plus'
 
 import { unwrap } from '@/utils/api'
@@ -50,7 +50,7 @@ const addNewUser = async () => {
 }
 
 // 更新已有用户
-const updateExistingUser = async (id: number) => {
+const updateExistingUser = async (id: string) => {
   const currentUser = users.value.find((user) => user.id === id)
   if (!currentUser) return
   const updataStatus = currentUser.status === 'active' ? 'inactive' : 'active'

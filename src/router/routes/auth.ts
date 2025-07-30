@@ -5,7 +5,7 @@ export const authRoutes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login', // 路由名称，与 LoginPage.vue 对应
-    component: () => import('@/views/auth/LoginPage.vue'), // ✅ 指向新的页面路径
+    component: () => import('@/features/auth/LoginPage.vue'), // ✅ 指向新的页面路径
     meta: {
       title: '登录',
       requiresAuth: false, // 登录页面不需要认证

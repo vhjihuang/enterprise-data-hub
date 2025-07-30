@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getProducts, addProduct, patchProduct, deleteProduct, type Product } from '@/services/products'
+import { getProducts, addProduct, patchProduct, deleteProduct, type Product } from '@/features/product/api/products'
 import { unwrap } from '@/utils/api'
-import ProductFormDialog from '@/components/ProductFormDialog.vue'
+import ProductFormDialog from '@/features/product/components/ProductFormDialog.vue'
 
 interface searchForm {
   name: string

@@ -1,11 +1,22 @@
 {
   "extends": "./tsconfig.app.json",
-  "include": ["src/**/__tests__/*", "env.d.ts"],
-  "exclude": [],
+  "include": [
+    "src/**/__tests__/*",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "tests/**/*.spec.ts", // ✅ 添加：让 tests/unit/... 被识别
+    "tests/**/*.test.ts", // ✅ 可选
+    "env.d.ts",
+    "vitest.config.ts"
+  ],
   "compilerOptions": {
+    "baseUrl": ".",
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
-
-    "lib": [],
-    "types": ["node", "jsdom"]
+    "types": ["node", "jsdom"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@features/*": ["./src/features/*"],
+      "@auth-store/*": ["./src/features/auth/stores/*"] // ✅ 添加 alias
+    }
   }
 }

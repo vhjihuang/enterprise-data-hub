@@ -3,7 +3,7 @@
     import { ref, computed } from 'vue'
     import { useRouter } from 'vue-router'
     import { useMenuRoutes } from '@/composables/useMenuRoutes'
-    import { useAuthStore } from '@/stores/auth'
+    import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
     import {
       ElContainer, ElAside, ElHeader, ElMain, ElMenu, ElMenuItem, ElIcon, ElAvatar, ElButton,

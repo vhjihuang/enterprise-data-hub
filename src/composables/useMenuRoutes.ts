@@ -1,7 +1,7 @@
 // src/composables/useMenuRoutes.ts
 import { ref, watchEffect } from 'vue' // ✅ 确保 ref 已导入
 import { useRouter, type RouteRecordRaw } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
 // ✅ 导入所有模块化的路由数组
 // 这些路由文件位于 src/router/routes/ 目录下

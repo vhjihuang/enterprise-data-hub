@@ -2,8 +2,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
-// ✅ 导入所有模块化的路由数组
-// 这些是你在 src/router/routes/ 目录下创建的文件
+// 导入各模块路由
 import { authRoutes } from './routes/auth'
 import { dashboardRoutes } from './routes/dashboard'
 import { userRoutes } from './routes/user'
@@ -12,21 +11,20 @@ import { productRoutes } from './routes/product'
 import { orderRoutes } from './routes/order'
 import { aboutRoutes } from './routes/about'
 
-// ✅ 定义系统级路由 (例如 404 页面)。
-// 如果你希望将 404 路由放在单独的 system.ts 文件中，可以从那里导入。
+// 系统级路由
 const systemRoutes: RouteRecordRaw[] = [
   {
-    path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
+    path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('@/views/not-found/NotFoundPage.vue'), // ✅ 指向你新的 404 页面路径
+    component: () => import('@features/not-found/NotFoundPage.vue'),
     meta: { title: '404 Not Found', hidden: true },
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  // ✅ 将所有模块化的路由和系统级路由合并
   routes: [
+    // 业务路由
     ...authRoutes,
     ...dashboardRoutes,
     ...userRoutes,
@@ -34,52 +32,48 @@ const router = createRouter({
     ...productRoutes,
     ...orderRoutes,
     ...aboutRoutes,
+    // 系统路由放在最后
     ...systemRoutes,
   ],
 })
 
-// 路由守卫逻辑 (从你旧的 index.ts 中提取并略作优化)
+// 路由守卫逻辑
 const setDocumentTitle = (title?: string) => {
   document.title = title ? `${title} - 企业级数据中心` : '企业级数据中心'
 }
 
-const initializeAuthState = async () => {
-  const authStore = useAuthStore()
-  // 仅在未初始化时调用 initializeAuth。Pinia Store 内部会处理 localStorage 读取。
-  // 移除了冗余的 localStorage.getItem('auth_token') 检查
-  if (!authStore.isInitialized) {
-    await authStore.initializeAuth()
-  }
-  return authStore
-}
-
 router.beforeEach(async (to) => {
-  setDocumentTitle(to.meta.title)
-  const authStore = await initializeAuthState()
+  setDocumentTitle(to.meta.title as string)
+  const authStore = useAuthStore()
 
-  if (to.path === '/login') {
-    // 如果已认证，尝试重定向到仪表盘，否则允许访问登录页
-    return authStore.isAuthenticated ? '/' : true
+  // 初始化认证状态
+  if (!authStore.isInitialized) {
+    authStore.initializeAuth()
   }
 
+  // 检查是否需要认证
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    // 如果需要认证但未认证，重定向到登录页
-    return { path: '/login', query: { redirect: to.fullPath } }
+    return { name: 'Login' }
   }
 
-  // 权限检查 (如果路由定义了 roles 并且用户角色不匹配)
-  if (to.meta.requiresAuth && to.meta.roles && authStore.currentRole) {
-    const requiredRoles = Array.isArray(to.meta.roles) ? to.meta.roles : [to.meta.roles]
-    if (!requiredRoles.includes(authStore.currentRole)) {
-      // 如果用户角色没有权限，重定向到首页 (或者如果你有 403 页面，可以重定向到 '/403')
-      console.warn(
-        `User role '${authStore.currentRole}' does not have required roles: ${requiredRoles.join(', ')} for path '${to.path}'`,
-      )
-      return { path: '/' }
-    }
+  // 检查角色权限
+  if (
+    authStore.isAuthenticated &&
+    to.meta.roles &&
+    authStore.userRole &&
+    !to.meta.roles.includes(authStore.userRole)
+  ) {
+    // 根据用户角色重定向到合适的默认页面
+    const defaultPath = authStore.userRole === 'admin' ? '/dashboard' : '/about'
+    return { path: defaultPath }
   }
 
-  return true // 允许导航
+  // 登录成功后重定向到首页或其他页面
+  if (to.name === 'Login' && authStore.isAuthenticated) {
+    return { path: '/' }
+  }
+  
+  return true
 })
 
 export default router

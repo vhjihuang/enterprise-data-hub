@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import TheWelcome from '@/components/TheWelcome.vue'
 import { Edit } from '@element-plus/icons-vue'
-import { ref } from 'vue'
-import { type User, getUsers, addUser, updateUser, deleteUser } from '@/features/user/api/users'
+import { ref, onMounted } from 'vue'
+import type { User } from '@/features/user/types'
+import { getUsers, addUser, updateUser, deleteUser } from '@/features/user/api/users'
 import { ElMessage, ElMessageBox, ElAlert } from 'element-plus'
 
 import { unwrap } from '@/utils/api'
@@ -39,7 +40,7 @@ const addNewUser = async () => {
     name: `新用户${Math.floor(Math.random() * 1000)}`,
     email: `newuser${Math.floor(Math.random() * 1000)}@example.com`,
     role: 'guest',
-    status: 'pending'
+    status: 'active' as const
   }
   try {
     await addUser(newUser)
@@ -51,12 +52,12 @@ const addNewUser = async () => {
 
 // 更新已有用户
 const updateExistingUser = async (id: string) => {
-  const currentUser = users.value.find((user) => user.id === id)
+  const currentUser = users.value.find((user: User) => user.id === id)
   if (!currentUser) return
   const updataStatus = currentUser.status === 'active' ? 'inactive' : 'active'
   const updateData = {
     email: `updated-${Math.floor(Math.random() * 1000)}@example.com`,
-    status: updataStatus
+    status: updataStatus as 'active' | 'inactive'
   }
   try {
     await updateUser(id, updateData)
@@ -69,7 +70,7 @@ const updateExistingUser = async (id: string) => {
 }
 
 // 删除用户
-const deleteExistingUser = async (id: number) => {
+const deleteExistingUser = async (id: string) => {
 
   ElMessageBox.confirm(`确定要删除用户 ID:${id}吗? 此操作不可逆`, '确认删除', {
     confirmButtonText: '确定',
@@ -88,10 +89,10 @@ const deleteExistingUser = async (id: number) => {
   })
 
 }
-// onMounted(() => {
-fetchUsers()
-// })
 
+onMounted(() => {
+  fetchUsers()
+})
 </script>
 
 <template>

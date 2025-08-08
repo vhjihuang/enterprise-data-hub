@@ -4,7 +4,6 @@ import { onMounted, computed } from 'vue'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-
 const authStore = useAuthStore()
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
@@ -26,7 +25,6 @@ onMounted(() => {
     </el-icon>
   </div>
   <DefaultLayout v-else-if="isAuthenticated" />
-
   <RouterView v-else />
 </template>
 

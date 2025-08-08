@@ -7,5 +7,6 @@ export interface LoginResponse {
 export type AuthState = {
   token: string | null
   userRole: 'admin' | 'user' | 'guest' | null | string
+  username: string | null
   isInitialized: boolean
 }

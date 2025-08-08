@@ -23,23 +23,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-// 导入 Pinia 的 Auth Store
-import { useAuthStore } from '@/features/auth/stores/useAuthStore' // 确保路径正确
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 import type { FormInstance, FormRules } from 'element-plus'
-
-// 移除或注释掉这行：
-// console.log('LoginView mounted')
 
 const router = useRouter()
 const loginForm = ref<FormInstance>()
 const loading = ref(false)
 
-// 获取 Auth Store 实例
 const authStore = useAuthStore()
 
 const form = ref({
-  username: '', // 移除 'admin'
-  password: ''  // 移除 'password'
+  username: 'admin',
+  password: 'password'
 })
 
 const rules = ref<FormRules>({
@@ -50,19 +45,13 @@ const rules = ref<FormRules>({
 const handleLogin = async () => {
   try {
     loading.value = true
-    // 1. 表单验证
     await loginForm.value?.validate()
-
-    // 2. 调用 Auth Store 的 login action
-    // Auth Store 的 login action 内部会处理 API 调用和 token/role 的存储
     await authStore.login(form.value)
 
-    // 3. 登录成功后跳转
-    const redirect = router.currentRoute.value.query.redirect as string
-    router.replace(redirect || '/') // 优化：改为 replace，防止回退到登录页
+    // 登录成功后跳转到指定页面或默认页面
+    const redirect = router.currentRoute.value.query.redirect as string || '/'
+    router.replace(redirect)
   } catch (error) {
-    // 错误处理：Axios 拦截器已经通过 ElMessage 显示错误消息了，
-    // 这里可以进行一些组件内部的额外处理，例如重置表单或显示更具体的错误给用户。
     console.error('登录失败:', error)
   } finally {
     loading.value = false

@@ -10,6 +10,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     AboutPage: typeof import('./src/views/about/AboutPage.vue')['default']
     AboutView: typeof import('./src/views/AboutView.vue')['default']
+    AppHeader: typeof import('./src/components/layout/AppHeader.vue')['default']
+    AppSidebar: typeof import('./src/components/layout/AppSidebar.vue')['default']
+    BaseButton: typeof import('./src/components/ui/BaseButton.vue')['default']
     Dashboard: typeof import('./src/views/Dashboard.vue')['default']
     DashboardPage: typeof import('./src/views/dashboard/DashboardPage.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -43,6 +46,7 @@ declare module 'vue' {
     NotFoundView: typeof import('./src/views/NotFoundView.vue')['default']
     OrderFormDialog: typeof import('./src/components/OrderFormDialog.vue')['default']
     OrderListPage: typeof import('./src/views/order-management/OrderListPage.vue')['default']
+    OrderStatusBadge: typeof import('./src/components/domain/OrderStatusBadge.vue')['default']
     OrderView: typeof import('./src/views/OrderView.vue')['default']
     ProductFormDialog: typeof import('./src/components/ProductFormDialog.vue')['default']
     ProductListPage: typeof import('./src/views/product-management/ProductListPage.vue')['default']

@@ -7,7 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'node:path'
-console.log('Resolved path:', path.resolve(__dirname, './src/features'))
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -27,12 +27,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@auth-store': path.resolve(__dirname, './src/features/auth/stores'),
-      '@features/auth/api/auth': path.resolve(
-        __dirname,
-        './tests/unit/features/auth/__mocks__/api.ts',
-      ),
       '@': path.resolve(__dirname, './src'),
       '@features': path.resolve(__dirname, './src/features'),
     },

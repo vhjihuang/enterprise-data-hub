@@ -11,18 +11,9 @@ export const login = async (credentials: {
   password: string
 }): Promise<LoginResponse> => {
   try {
-    // 模拟登录API调用
-    // 实际项目中这里会向服务器发送请求
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const response: LoginResponse = {
-          token: 'fake-jwt-token-' + Date.now(),
-          role: credentials.username === 'admin' ? 'admin' : 'user',
-          username: credentials.username
-        }
-        resolve(response)
-      }, 500)
-    })
+    // 使用真实的API调用
+    const response = await http.post<LoginResponse>('/login', credentials)
+    return response.data
   } catch (error) {
     throw error
   }

@@ -1,21 +1,42 @@
-// src/views/LoginView.vue
 <template>
-  <div class="login-container">
-    <el-card class="login-card">
-      <h2>企业级数据中心</h2>
-      <el-form ref="loginForm" :model="form" :rules="rules" @submit.prevent="handleLogin">
-        <el-form-item prop="username">
-          <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="User" />
+  <div class="login-container bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <!-- 动态粒子背景（可选） -->
+    <div class="particles absolute inset-0 overflow-hidden opacity-20 dark:opacity-10"></div>
+
+    <el-card class="login-card relative bg-white dark:bg-gray-800 shadow-xl">
+      <!-- 品牌标识 -->
+      <div class="flex flex-col items-center mb-8">
+        <div class="w-16 h-16 mb-4 bg-blue-500 rounded-xl flex items-center justify-center shadow-md">
+          <el-icon class="text-white text-2xl">
+            <DataAnalysis />
+          </el-icon>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">企业级数据中心</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">安全访问您的数据资产</p>
+      </div>
+
+      <el-form ref="loginForm" :model="form" :rules="rules" @submit.prevent="handleLogin" class="space-y-5">
+        <el-form-item prop="username" class="!mb-6">
+          <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="User" class="custom-input" size="large" />
         </el-form-item>
-        <el-form-item prop="password">
-          <el-input v-model="form.password" type="password" placeholder="请输入密码" prefix-icon="Lock" show-password />
+
+        <el-form-item prop="password" class="!mb-6">
+          <el-input v-model="form.password" type="password" placeholder="请输入密码" prefix-icon="Lock" show-password
+            class="custom-input" size="large" />
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" native-type="submit" :loading="loading" class="login-btn">
-            登录
+
+        <el-form-item class="!mt-8">
+          <el-button type="primary" native-type="submit" :loading="loading"
+            class="w-full h-12 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
+            <span class="font-medium">{{ loading ? '登录中...' : '登录系统' }}</span>
           </el-button>
         </el-form-item>
       </el-form>
+
+      <!-- 底部信息 -->
+      <div class="mt-8 text-center text-xs text-gray-400 dark:text-gray-500">
+        <p>© 2023 企业数据中心 v{{ version }}</p>
+      </div>
     </el-card>
   </div>
 </template>
@@ -26,10 +47,11 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 import type { FormInstance, FormRules } from 'element-plus'
 
+const version = __APP_VERSION__ // 来自vite配置
+
 const router = useRouter()
 const loginForm = ref<FormInstance>()
 const loading = ref(false)
-
 const authStore = useAuthStore()
 
 const form = ref({
@@ -47,8 +69,6 @@ const handleLogin = async () => {
     loading.value = true
     await loginForm.value?.validate()
     await authStore.login(form.value)
-
-    // 登录成功后跳转到指定页面或默认页面
     const redirect = router.currentRoute.value.query.redirect as string || '/'
     router.replace(redirect)
   } catch (error) {
@@ -61,25 +81,34 @@ const handleLogin = async () => {
 
 <style scoped>
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5;
+  @apply flex items-center justify-center min-h-screen p-4;
 }
 
 .login-card {
-  width: 400px;
-  padding: 30px;
-  text-align: center;
+  @apply w-full max-w-md p-8 border-0;
+  backdrop-filter: blur(8px);
 }
 
-.login-card h2 {
-  margin-bottom: 30px;
-  color: #333;
+.custom-input :deep(.el-input__wrapper) {
+  @apply h-12 px-4 shadow-none rounded-lg border border-gray-200 dark:border-gray-600;
+  background: theme('colors.white') !important;
 }
 
-.login-btn {
-  width: 100%;
+.custom-input :deep(.el-input__wrapper.is-focus) {
+  @apply ring-2 ring-blue-500 border-blue-500;
+}
+
+.dark .custom-input :deep(.el-input__wrapper) {
+  background: theme('colors.gray.700') !important;
+}
+
+/* 粒子背景效果 */
+.particles {
+  background-image: radial-gradient(theme('colors.gray.400') 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .particles {
+  background-image: radial-gradient(theme('colors.gray.600') 1px, transparent 1px);
 }
 </style>
